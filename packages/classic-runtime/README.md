@@ -25,22 +25,17 @@ React의 `React.createElement`와 유사하게, JSX 구문을 명시적인 함�
 }
 ```
 
-그리고 JSX를 사용하는 파일 상단에서 팩토리 함수를 가져와야 합니다.
+vite.config.ts에 다음 속성을 추가하세요.
 
-```tsx
-import { toElement, Fragment } from '@jsx-runtime/classic-runtime';
-
-const element = <><div>Hello World</div></>;
-```
-
-또는 파일별로 pragma를 사용할 수도 있습니다.
-
-```tsx
-/** @jsx toElement */
-/** @jsxFrag Fragment */
-import { createElement, Fragment } from '@jsx-runtime/classic-runtime';
-
-const element = <><div>Hello World</div></>;
+```typescript
+export default defineConfig({
+  // ... other configs
+  esbuild: {
+    jsxFactory: "toElement",
+    jsxFragment: "Fragment",
+    jsxInject: `import { toElement, Fragment } from "@jsx-runtime/classic-runtime"`,
+  },
+});
 ```
 
 ## 📦 빌드
